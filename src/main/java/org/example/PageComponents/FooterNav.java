@@ -9,7 +9,7 @@ public class FooterNav extends AbstractComponent {
   //  By sectionElement=By.id("traveller-home");
 
     By flights=By.cssSelector("[title='Flights']");
-
+    By links=By.cssSelector("a");
     public FooterNav(WebDriver driver, By sectionElement) {
         super(driver,sectionElement);
     }
@@ -19,8 +19,15 @@ public class FooterNav extends AbstractComponent {
     //When selenium executes any method in this class the scope of the selenium should be in footer only
 
 
-    public void getFlightAttribute()
+    public String getFlightAttribute()
     {
-        System.out.println(findElement(flights).getAttribute("class"));
+        return findElement(flights).getAttribute("class");
+    }
+
+    public int getLinksCount()
+    {
+
+        return  findElements(links).size();
+
     }
 }

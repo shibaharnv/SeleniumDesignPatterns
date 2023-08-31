@@ -3,14 +3,22 @@ package org.example.AbstractComponents;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+import java.util.List;
 
 public abstract class AbstractComponent {
 
 
     WebElement sectionElement;
+    WebDriver driver;
     public AbstractComponent(WebDriver driver, By sectionElement) {
         //this.driver=driver;
         this.sectionElement=  driver.findElement(sectionElement);
+        this.driver=driver;
     }
 
     // Abstract class is a class in java that cannot be instantiated and it serve as a blue print for other classes
@@ -24,5 +32,16 @@ public abstract class AbstractComponent {
     public WebElement  findElement(By findElementBy)
     {
         return  sectionElement.findElement(findElementBy);
+    }
+
+    public List<WebElement> findElements(By findElementsBy)
+    {
+        return  sectionElement.findElements(findElementsBy);
+    }
+
+    public void waitForElementToDisappear(WebElement findBy)
+    {
+        WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.invisibilityOf(findBy));
     }
 }
